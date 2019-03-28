@@ -28,5 +28,5 @@ test_script:
   - git config --global core.autocrlf true
   - git config --global core.safecrlf false
 
-  build_script:
+build_script:
   - ps: . .\tests\Build.ps1
