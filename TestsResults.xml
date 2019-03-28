@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="1" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2019-03-28" time="11:01:48">
+<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="1" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2019-03-28" time="12:39:48">
   <environment user="appveyor" machine-name="APPVYR-WIN" cwd="C:\projects\intune-icons" user-domain="APPVYR-WIN" platform="Microsoft Windows Server 2012 R2 Datacenter|C:\windows|\Device\Harddisk0\Partition5" nunit-version="2.5.8.0" os-version="6.3.9600" clr-version="4.0.30319.42000" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="TestFixture" name="Pester" executed="True" result="Success" success="True" time="1.3287" asserts="0" description="Pester">
+  <test-suite type="TestFixture" name="Pester" executed="True" result="Success" success="True" time="1.1491" asserts="0" description="Pester">
     <results>
-      <test-suite type="TestFixture" name="C:\projects\intune-icons\tests\Main.Tests.ps1" executed="True" result="Success" success="True" time="1.3287" asserts="0" description="C:\projects\intune-icons\tests\Main.Tests.ps1">
+      <test-suite type="TestFixture" name="C:\projects\intune-icons\tests\Main.Tests.ps1" executed="True" result="Success" success="True" time="1.1491" asserts="0" description="C:\projects\intune-icons\tests\Main.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Images tests" executed="True" result="Success" success="True" time="1.1669" asserts="0" description="Images tests">
+          <test-suite type="TestFixture" name="Images tests" executed="True" result="Success" success="True" time="1.0017" asserts="0" description="Images tests">
             <results>
-              <test-case description="Should only contain PNG images" name="Images tests.Should only contain PNG images" time="0.4512" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Should only contain PNG images" name="Images tests.Should only contain PNG images" time="0.487" asserts="0" success="True" result="Success" executed="True" />
             </results>
           </test-suite>
         </results>
