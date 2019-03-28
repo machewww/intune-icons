@@ -9,25 +9,17 @@ Else {
 Write-Host "Project root is: $projectRoot"
 
 #region Functions
-<#PSScriptInfo 
-    .VERSION 1.4 
-    .GUID b787dc5d-8d11-45e9-aeef-5cf3a1f690de 
-    .AUTHOR Adam Bertram 
-    .COMPANYNAME Adam the Automator, LLC 
-    .TAGS Processes 
-#>
-
-<# 
-.DESCRIPTION 
-    Invoke-Process is a simple wrapper function that aims to "PowerShellyify" launching typical external processes. There 
-    are lots of ways to invoke processes in PowerShell with Start-Process, Invoke-Expression, & and others but none account 
-    well for the various streams and exit codes that an external process returns. Also, it's hard to write good tests 
-    when launching external proceses. 
- 
-    This function ensures any errors are sent to the error stream, standard output is sent via the Output stream and any 
-    time the process returns an exit code other than 0, treat it as an error. 
-#> 
 Function Invoke-Process {
+    <# 
+    .DESCRIPTION 
+        Invoke-Process is a simple wrapper function that aims to "PowerShellyify" launching typical external processes. There 
+        are lots of ways to invoke processes in PowerShell with Start-Process, Invoke-Expression, & and others but none account 
+        well for the various streams and exit codes that an external process returns. Also, it's hard to write good tests 
+        when launching external proceses. 
+    
+        This function ensures any errors are sent to the error stream, standard output is sent via the Output stream and any 
+        time the process returns an exit code other than 0, treat it as an error. 
+    #> 
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [Parameter(Mandatory)]
@@ -80,15 +72,17 @@ Function Invoke-Process {
         Remove-Item -Path $stdOutTempFile, $stdErrTempFile -Force -ErrorAction Ignore
     }
 }
-
 #endregion
 
 #region Optimise images
-$images = Get-ChildItem -Path (Join-Path $projectRoot "icons") -Recurse -Include *.*
+$pngout = "$projectRoot\pngout\pngout.exe"
+$icons = "$projectRoot\icons"
+Push-Location $icons
+$images = Get-ChildItem -Path $icons -Recurse -Include *.*
 ForEach ($image in $images) {
-    Write-Host "Optimising: $($image.Name)"
-    Invoke-Process -FilePath (Join-Path $projectRoot "\pngout\pngout.exe") -ArgumentList $image.Name
+    $result = Invoke-Process -FilePath $pngout -ArgumentList $image.PSPath -Verbose
 }
+Pop-Location
 #endregion
 
 #region Tests
