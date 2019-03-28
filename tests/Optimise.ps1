@@ -31,7 +31,8 @@ Function Invoke-Process {
         [string] $ArgumentList
     )
 
-    $ErrorActionPreference = 'Stop'
+    # Set to avoid issues where the image has already been optimised
+    $ErrorActionPreference = 'SilentlyContinue'
 
     try {
         $stdOutTempFile = "$env:TEMP\$((New-Guid).Guid)"
@@ -81,7 +82,7 @@ Push-Location $icons
 $images = Get-ChildItem -Path $icons -Recurse -Include *.*
 ForEach ($image in $images) {
     Write-Host "Optimising: $($image.FullName)"
-    $result = Invoke-Process -FilePath $pngout -ArgumentList $image.FullName | Out-Null
+    $result = Invoke-Process -FilePath $pngout -ArgumentList $image.FullName
 }
 Pop-Location
 #endregion
