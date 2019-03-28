@@ -9,6 +9,7 @@ environment:
 
 image: WMF 5
 deploy: off
+build: off
 
 only_commits:
   files:
