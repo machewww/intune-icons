@@ -16,7 +16,7 @@ only_commits:
     - icons/
 
 skip_commits:
-  message: /AppVeyor optimise and validate.*/
+  message: /AppVeyor optimise and validate.*|Merge branch 'master' of.*/
 
 install:
 - ps: . .\tests\Install.ps1
