@@ -13,7 +13,7 @@ build: off
 
 only_commits:
   files:
-    - icons/
+    - icons/*
 
 skip_commits:
   message: /AppVeyor optimise and validate.*|Merge branch 'master' of.*/
