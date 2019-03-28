@@ -47,7 +47,7 @@ Function Invoke-Process {
             PassThru               = $true;
             NoNewWindow            = $true;
         }
-        if ($PSCmdlet.ShouldProcess("[$($FilePath)]", "[$($ArgumentList)]")) {
+        if ($PSCmdlet.ShouldProcess("[$($ArgumentList)]", "[$($FilePath)]")) {
             $cmd = Start-Process @startProcessParams
             $cmdOutput = Get-Content -Path $stdOutTempFile -Raw
             $cmdError = Get-Content -Path $stdErrTempFile -Raw
@@ -80,9 +80,17 @@ $pngout = "$projectRoot\pngout\pngout.exe"
 $icons = "$projectRoot\icons"
 Push-Location $icons
 $images = Get-ChildItem -Path $icons -Recurse -Include *.*
+$cleanUp = @()
 ForEach ($image in $images) {
     Write-Host "Optimising: $($image.FullName)"
     $result = Invoke-Process -FilePath $pngout -ArgumentList $image.FullName -Verbose
+    If ($result -eq 0) {
+        If ([IO.Path]::GetExtension($image.Name) -notmatch ".png" ) {
+            $cleanUp += $image.FullName
+        }
+    }
 }
+# Remove files that aren't .png that have been optimised
+ForEach ($file in $cleanUp) { Remove-Item -Path $file.FullName -Verbose }
 Pop-Location
 #endregion
