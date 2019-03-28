@@ -28,7 +28,7 @@ Else {
         git checkout master
         git add --all
         git status
-        git commit -s -m "Run tests; Optimise icons"
+        git commit -s -m "AppVeyor optimise and validate"
         git push origin master
         Write-Host "intune-icons published to GitHub." -ForegroundColor Cyan
     }

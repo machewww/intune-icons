@@ -15,6 +15,9 @@ only_commits:
   files:
     - icons/
 
+skip_commits:
+  message: /AppVeyor optimise and validate.*/
+
 install:
 - ps: . .\tests\Install.ps1
 
