@@ -47,16 +47,16 @@ Function Invoke-Process {
             PassThru               = $true;
             NoNewWindow            = $true;
         }
-        if ($PSCmdlet.ShouldProcess("Process [$($FilePath)]", "Run with args: [$($ArgumentList)]")) {
+        if ($PSCmdlet.ShouldProcess("[$($FilePath)]", "[$($ArgumentList)]")) {
             $cmd = Start-Process @startProcessParams
             $cmdOutput = Get-Content -Path $stdOutTempFile -Raw
             $cmdError = Get-Content -Path $stdErrTempFile -Raw
             if ($cmd.ExitCode -ne 0) {
                 if ($cmdError) {
-                    throw $cmdError.Trim()
+                    # throw $cmdError.Trim()
                 }
                 if ($cmdOutput) {
-                    throw $cmdOutput.Trim()
+                    # throw $cmdOutput.Trim()
                 }
             }
             else {
@@ -82,7 +82,7 @@ Push-Location $icons
 $images = Get-ChildItem -Path $icons -Recurse -Include *.*
 ForEach ($image in $images) {
     Write-Host "Optimising: $($image.FullName)"
-    $result = Invoke-Process -FilePath $pngout -ArgumentList $image.FullName
+    $result = Invoke-Process -FilePath $pngout -ArgumentList $image.FullName -Verbose
 }
 Pop-Location
 #endregion
