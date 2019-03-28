@@ -80,7 +80,7 @@ $icons = "$projectRoot\icons"
 Push-Location $icons
 $images = Get-ChildItem -Path $icons -Recurse -Include *.*
 ForEach ($image in $images) {
-    $result = Invoke-Process -FilePath $pngout -ArgumentList $image.PSPath -Verbose
+    $result = Invoke-Process -FilePath $pngout -ArgumentList $image.FullName -Verbose
 }
 Pop-Location
 #endregion
