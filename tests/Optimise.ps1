@@ -91,6 +91,7 @@ ForEach ($image in $images) {
     }
 }
 # Remove files that aren't .png that have been optimised
-ForEach ($file in $cleanUp) { Remove-Item -Path $file.FullName -Verbose }
+$cleanUp
+ForEach ($file in $cleanUp) { Remove-Item -Path $file -Force -Verbose }
 Pop-Location
 #endregion
