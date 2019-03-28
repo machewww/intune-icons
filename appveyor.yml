@@ -27,6 +27,4 @@ test_script:
   - git config --global user.name "Aaron Parker"
   - git config --global core.autocrlf true
   - git config --global core.safecrlf false
-
-build_script:
   - ps: . .\tests\Build.ps1
