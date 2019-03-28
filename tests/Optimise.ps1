@@ -82,16 +82,15 @@ Push-Location $icons
 $images = Get-ChildItem -Path $icons -Recurse -Include *.*
 $cleanUp = @()
 ForEach ($image in $images) {
-    Write-Host "Optimising: $($image.FullName)"
-    $result = Invoke-Process -FilePath $pngout -ArgumentList $image.FullName -Verbose
-    If ($result -eq 0) {
+    $result = Invoke-Process -FilePath $pngout -ArgumentList "$($image.FullName) /y /force" -Verbose
+    If ($result -like "*Out:*") {
+        $result
         If ([IO.Path]::GetExtension($image.Name) -notmatch ".png" ) {
             $cleanUp += $image.FullName
         }
     }
 }
 # Remove files that aren't .png that have been optimised
-$cleanUp
 ForEach ($file in $cleanUp) { Remove-Item -Path $file -Force -Verbose }
 Pop-Location
 #endregion
