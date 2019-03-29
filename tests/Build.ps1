@@ -28,9 +28,9 @@ Else {
         git checkout master
         git add --all
         git status
-        git commit -s -m "AppVeyor optimise and validate"
+        git commit -s -m "AppVeyor optimise and validate $env:APPVEYOR_BUILD_VERSION"
         git push origin master
-        Write-Host "intune-icons published to GitHub." -ForegroundColor Cyan
+        Write-Host "intune-icons $env:APPVEYOR_BUILD_VERSION published to GitHub." -ForegroundColor Cyan
     }
     Catch {
         # Sad panda; it broke
