@@ -77,25 +77,55 @@ Function Invoke-Process {
 
 #region Optimise images
 $pngout = "$projectRoot\utils\pngout.exe"
-$pngcrush = "$projectRoot\utils\pngcrush.exe"
+# $pngcrush = "$projectRoot\utils\pngcrush.exe"
 $icons = "$projectRoot\icons"
+$imageHashes = "$projectRoot\tests\ImageHashes.json"
 
-Push-Location $icons
+# Read in the existing hashes file, otherwise determine the hashes of PNG files
+If (Test-Path -Path $imageHashes) {
+    $pngHashes = Get-Content -Path $imageHashes -Verbose | ConvertFrom-Json
+}
+Else {
+    $pngImages = Get-ChildItem -Path $icons -Recurse -Include *.png
+    $pngHashes = @{}
+    ForEach ($png in $pngImages) {
+        $hash = Get-FileHash -Path $png.FullName
+        $pngHashes.Add((Split-Path -Path $hash.Path -Leaf), $hash.Hash)
+    }
+}
+
+# Get all images in the icons folder
 $images = Get-ChildItem -Path $icons -Recurse -Include *.*
 
+# Optimse each file if the hash does not match
+Push-Location $icons
 $cleanUp = @()
 ForEach ($image in $images) {
-    $result = Invoke-Process -FilePath $pngout -ArgumentList "$($image.FullName) /y /force" -Verbose
-    If ($result -like "*Out:*") {
-        $result
-        If ([IO.Path]::GetExtension($image.Name) -notmatch ".png" ) {
-            $cleanUp += $image.FullName
+    $hash = Get-FileHash -Path $image.FullName -Verbose
+    If ($pngHashes.($image.Name) -ne $hash.Hash) {
+        $result = Invoke-Process -FilePath $pngout -ArgumentList "$($image.FullName) /y /force" -Verbose
+        If ($result -like "*Out:*") {
+            $result
+            If ([IO.Path]::GetExtension($image.Name) -notmatch ".png" ) {
+                $cleanUp += $image.FullName
+            }
         }
+    }
+    Else {
+        Write-Host "$($image.Name): Hash matches. Skip optimisation."
     }
 }
 
 # Remove files that aren't .png that have been optimised
 ForEach ($file in $cleanUp) { Remove-Item -Path $file -Force -Verbose }
-
 Pop-Location
+
+# Read the hashes from all PNG files and output to file for next run
+$pngImages = Get-ChildItem -Path $icons -Recurse -Include *.png
+$pngHashes = @{}
+ForEach ($png in $pngImages) {
+    $hash = Get-FileHash -Path $png.FullName
+    $pngHashes.Add((Split-Path -Path $hash.Path -Leaf), $hash.Hash)
+}
+$pngHashes | Convertto-Json | Out-File -FilePath $imageHashes -Force -Verbose
 #endregion
