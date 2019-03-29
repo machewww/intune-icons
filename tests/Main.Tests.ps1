@@ -8,6 +8,7 @@ Else {
 }
 
 #region Tests
+$icons = "$projectRoot\icons"
 Describe "Images tests" {
     $images = Get-ChildItem -Path $icons -Recurse -Include *.*
     It "Should only contain PNG images" {

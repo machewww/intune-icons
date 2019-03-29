@@ -82,8 +82,8 @@ $icons = "$projectRoot\icons"
 
 Push-Location $icons
 $images = Get-ChildItem -Path $icons -Recurse -Include *.*
-$cleanUp = @()
 
+$cleanUp = @()
 ForEach ($image in $images) {
     $result = Invoke-Process -FilePath $pngout -ArgumentList "$($image.FullName) /y /force" -Verbose
     If ($result -like "*Out:*") {
