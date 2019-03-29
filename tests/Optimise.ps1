@@ -76,11 +76,14 @@ Function Invoke-Process {
 #endregion
 
 #region Optimise images
-$pngout = "$projectRoot\pngout\pngout.exe"
+$pngout = "$projectRoot\utils\pngout.exe"
+$pngcrush = "$projectRoot\utils\pngcrush.exe"
 $icons = "$projectRoot\icons"
+
 Push-Location $icons
 $images = Get-ChildItem -Path $icons -Recurse -Include *.*
 $cleanUp = @()
+
 ForEach ($image in $images) {
     $result = Invoke-Process -FilePath $pngout -ArgumentList "$($image.FullName) /y /force" -Verbose
     If ($result -like "*Out:*") {
@@ -90,7 +93,9 @@ ForEach ($image in $images) {
         }
     }
 }
+
 # Remove files that aren't .png that have been optimised
 ForEach ($file in $cleanUp) { Remove-Item -Path $file -Force -Verbose }
+
 Pop-Location
 #endregion
