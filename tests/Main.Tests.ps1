@@ -9,12 +9,23 @@ Else {
 
 #region Tests
 $icons = "$projectRoot\icons"
-Describe "Images tests" {
-    $images = Get-ChildItem -Path $icons -Recurse -Include *.*
-    It "Should only contain PNG images" {
+$images = Get-ChildItem -Path $icons -Recurse -Include *.*
+
+Describe "All images should be in PNG format" {
+    It "Should only be a .PNG file" {
         ForEach ($image in $images) {
             Write-Host "Testing: $($image.Name)"
             [IO.Path]::GetExtension($image.Name) -match ".png" | Should -Be $True
+        }
+    }
+}
+Describe "All images should be square" {
+    It "Should match height and width" {
+        Add-Type -AssemblyName System.Drawing
+        ForEach ($image in $images) {
+            Write-Host "Testing: $($image.Name)"
+            $png = New-Object System.Drawing.Bitmap $image.FullName
+            $png.Height -eq $png.Width | Should -Be $True
         }
     }
 }
