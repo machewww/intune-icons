@@ -12,19 +12,17 @@ $icons = "$projectRoot\icons"
 $images = Get-ChildItem -Path $icons -Recurse -Include *.*
 
 Describe "All images should be in PNG format" {
-    It "Should only be a .PNG file" {
-        ForEach ($image in $images) {
-            Write-Host "Testing: $($image.Name)"
+    ForEach ($image in $images) {
+        It "$($image.Name) should be a .PNG file" {
             [IO.Path]::GetExtension($image.Name) -match ".png" | Should -Be $True
         }
     }
 }
 Describe "All images should be square" {
-    It "Should match height and width" {
-        Add-Type -AssemblyName System.Drawing
-        ForEach ($image in $images) {
-            Write-Host "Testing: $($image.Name)"
-            $png = New-Object System.Drawing.Bitmap $image.FullName
+    Add-Type -AssemblyName System.Drawing
+    ForEach ($image in $images) {
+        $png = New-Object System.Drawing.Bitmap $image.FullName
+        It "$($image.Name) should match height and width" {
             $png.Height -eq $png.Width | Should -Be $True
         }
     }
