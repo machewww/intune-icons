@@ -81,17 +81,9 @@ $pngout = "$projectRoot\utils\pngout.exe"
 $icons = "$projectRoot\icons"
 $imageHashes = "$projectRoot\tests\ImageHashes.json"
 
-# Read in the existing hashes file, otherwise determine the hashes of PNG files
+# Read in the existing hashes file
 If (Test-Path -Path $imageHashes) {
     $pngHashes = Get-Content -Path $imageHashes -Verbose | ConvertFrom-Json
-}
-Else {
-    $pngImages = Get-ChildItem -Path $icons -Recurse -Include *.png
-    $pngHashes = @{}
-    ForEach ($png in $pngImages) {
-        $hash = Get-FileHash -Path $png.FullName
-        $pngHashes.Add((Split-Path -Path $hash.Path -Leaf), $hash.Hash)
-    }
 }
 
 # Get all images in the icons folder
@@ -112,7 +104,7 @@ ForEach ($image in $images) {
         }
     }
     Else {
-        Write-Host "$($image.Name): Hash matches. Skip optimisation."
+        Write-Host "Hash matches. Skip optimisation: $($image.Name)"
     }
 }
 
@@ -127,5 +119,5 @@ ForEach ($png in $pngImages) {
     $hash = Get-FileHash -Path $png.FullName
     $pngHashes.Add((Split-Path -Path $hash.Path -Leaf), $hash.Hash)
 }
-$pngHashes | Convertto-Json | Out-File -FilePath $imageHashes -Force -Verbose
+$pngHashes | ConvertTo-Json | Out-File -FilePath $imageHashes -Force -Verbose
 #endregion
