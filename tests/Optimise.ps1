@@ -76,10 +76,10 @@ Function Invoke-Process {
 #endregion
 
 #region Optimise images
-$pngout = "$projectRoot\utils\pngout.exe"
-# $pngcrush = "$projectRoot\utils\pngcrush.exe"
-$icons = "$projectRoot\icons"
-$imageHashes = "$projectRoot\tests\ImageHashes.json"
+$pngout = Join-Path (Join-Path $projectRoot "utils") "pngout.exe"
+# $pngcrush = Join-Path (Join-Path $projectRoot "utils") "pngcrush.exe"
+$icons = Join-Path $projectRoot "icons"
+$imageHashes = Join-Path (Join-Path $projectRoot "tests") "ImageHashes.json"
 
 # Read in the existing hashes file
 If (Test-Path -Path $imageHashes) {

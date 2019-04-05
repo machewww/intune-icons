@@ -8,7 +8,7 @@ Else {
 }
 
 #region Tests
-$icons = "$projectRoot\icons"
+$icons = Join-Path $projectRoot "icons"
 $images = Get-ChildItem -Path $icons -Recurse -Include *.*
 
 Describe "All images should be in PNG format" {

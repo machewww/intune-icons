@@ -1,11 +1,3 @@
-If (Test-Path 'env:APPVEYOR_BUILD_FOLDER') {
-    $ProjectRoot = $env:APPVEYOR_BUILD_FOLDER
-}
-Else {
-    # Local Testing 
-    $ProjectRoot = ((Get-Item (Split-Path -Parent -Path $MyInvocation.MyCommand.Definition)).Parent).FullName
-}
-
 # Line break for readability in AppVeyor console
 Write-Host -Object ''
 
