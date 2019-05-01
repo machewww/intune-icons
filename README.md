@@ -11,7 +11,7 @@ Icons have been added in their largest size and best possible quality. All icons
 
 ## License
 
-While the repository itself is licensed with an MIT license, the icons themselves remain the property of their respective software vendors.
+While the repository is licensed with an MIT license, the icons themselves remain the property of their respective software vendors.
 
 [appveyor-badge]: https://img.shields.io/appveyor/ci/aaronparker/intune-icons/master.svg?style=flat-square&logo=appveyor
 [appveyor-build]: https://ci.appveyor.com/project/aaronparker/intune-icons
