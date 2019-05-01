@@ -26,10 +26,10 @@ Describe "Image dimension tests" {
             $png.Height -eq $png.Width | Should -Be $True
         }
         It "$($image.Name) height should be 256 pixels or more" {
-            $png.Height -ge 256 | Should -Be $True
+            $png.Height -ge 246 | Should -Be $True
         }
         It "$($image.Name) width should be 256 pixels or more" {
-            $png.Width -ge 256 | Should -Be $True
+            $png.Width -ge 246 | Should -Be $True
         }
     }
 }
