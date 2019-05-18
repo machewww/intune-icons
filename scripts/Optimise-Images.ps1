@@ -7,7 +7,8 @@
 $utils = Join-Path $projectRoot "utils"
 $pngout = Join-Path $utils "pngout.exe"
 $icons = Join-Path $projectRoot "icons"
-$imageHashes = Join-Path (Join-Path $projectRoot "tests") "ImageHashes.json"
+$scripts = Join-Path $projectRoot "scripts"
+$imageHashes = Join-Path $scripts "ImageHashes.json"
 
 #region Optimise images
 # Read in the existing hashes file
