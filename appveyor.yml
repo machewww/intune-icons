@@ -15,6 +15,7 @@ test_script:
 deploy_script:
 - ps: >-
     . .\scripts\Optimise-Images.ps1
+    
     . .\ci\Deploy.ps1
 
 skip_commits:

@@ -26,8 +26,5 @@ Install-Module -Name posh-git -Force
 $tests = Join-Path $projectRoot "tests"
 $output = Join-Path $projectRoot "TestsResults.xml"
 
-# Export XML validation module
-Import-Module "$tests\Test-XmlSchema.psm1"
-
 # Echo paths
 Write-Host "Tests path: $tests"
