@@ -14,6 +14,8 @@ test_script:
 - ps: . .\ci\Tests.ps1
 deploy_script:
 - ps: >-
+    . .\ci\Invoke-Process.ps1
+
     . .\scripts\Optimise-Images.ps1
     
     . .\ci\Deploy.ps1
