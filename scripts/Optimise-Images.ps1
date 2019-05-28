@@ -10,6 +10,9 @@ $icons = Join-Path $projectRoot "icons"
 $scripts = Join-Path $projectRoot "scripts"
 $imageHashes = Join-Path $scripts "ImageHashes.json"
 
+# Dot source Invoke-Process.ps1. Prevent 'RemoteException' error when running specific git commands
+. $projectRoot\ci\Invoke-Process.ps1
+
 #region Optimise images
 # Read in the existing hashes file
 If (Test-Path -Path $imageHashes) {
