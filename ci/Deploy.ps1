@@ -29,7 +29,7 @@ Else {
 
             # Configure the git environment
             git config --global credential.helper store
-            Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:GitHubKey):x-oauth-basic@github.com`n"
+            Add-Content -Path (Join-Path $env:USERPROFILE ".git-credentials") -Value "https://$($env:GitHubKey):x-oauth-basic@github.com`n"
             git config --global user.email "$($env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL)"
             git config --global user.name "$($env:APPVEYOR_REPO_COMMIT_AUTHOR)"
             git config --global core.autocrlf true
