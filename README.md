@@ -9,6 +9,8 @@ Applications are displayed in the Intune Company Portal app or at [https://porta
 
 Icons have been added in their largest size and best possible quality. All icons have been optimised for size using PNGCrush or PNGOUT. Icons are optimised and coverted to PNG format by scripts run by AppVeyor builds. All non-PNG files are then removed from the icons folder in the repository and pushed back to GitHub.
 
+![Icons](https://raw.githubusercontent.com/Insentra/intune-icons/master/icons.png)
+
 ## License
 
 While the repository is licensed with an MIT license, the icons themselves remain the property of their respective software vendors.
